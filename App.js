@@ -6,28 +6,45 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, AppRegistry, StyleSheet, Text, Image, View } from 'react-native';
+// import Login from './App/Login';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
-type Props = {};
-export default class App extends Component<Props> {
+
+
+export default class App extends Component {
+  constructor() {
+    super()
+    this.state = {}
+    this.state.customStyle = {
+      color: 'red'
+    }
+    setInterval(() => {
+      if(this.state.customStyle.color == 'red'){ 
+      this.setState({
+        customStyle: {
+          color: 'green'
+        }
+      })
+    } else{
+      this.setState({
+        customStyle: {
+          color: 'red'
+        }
+      })
+    }
+    }, 1000)
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <Text style={[styles.welcome, this.state.customStyle]}>TODO</Text>
       </View>
     );
   }
 }
+AppRegistry.registerComponent('App', () => App)
 
 const styles = StyleSheet.create({
   container: {
